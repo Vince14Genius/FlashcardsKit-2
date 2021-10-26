@@ -103,7 +103,13 @@
     document.getElementById("current-flashcard-reveal").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].reveal;
     document.getElementById("current-flashcard-reveal").style.display = fkIsCurrentFlashcardRevealed ? "block" : "none";
     document.getElementById("current-flashcard-instructions").innerHTML = fkIsCurrentFlashcardRevealed ? "Tap to continue" : "Tap to reveal";
-    document.getElementById("current-flashcard-index").innerHTML = `${fkCurrentFlashcardIndex + 1}/${fkFlashcardsList.length}`;
+    
+    const index = fkCurrentFlashcardIndex + 1;
+    const max = fkFlashcardsList.length;
+    
+    document.getElementById("current-flashcard-index").innerHTML = `${index}/${max}`;
+    document.getElementById("current-flashcard-progress").max = max;
+    document.getElementById("current-flashcard-progress").value = index;
   }
   
   function primaryUserAction() {
@@ -143,13 +149,17 @@
 <main id="main-content" class="centered" lang="en">
   <div id="visible-safe-area">
     <h1 class="flashcards-title">FlashcardsKit 2</h1>
-    <button onclick="loadJSON()">Load Flashcards</button>
+    <p class="flashcards-toolbar">
+      <button onclick="loadJSON()">Load Flashcards</button>
+      <a href="https://vince14genius.github.io/YAML-JSON-Flashcards/">A list of ready to use flashcards files</a>
+    </p>
     <p id="error-message">Click the "Load Flashcards" button to load your flashcards.</p>
     <div id="flashcard-content" style="visibility: hidden;">
       <h2 id="current-flashcard-title">current-flashcard-title</h2>
       <p id="current-flashcard-reveal" style="display: none;">current-flashcard-reveal</p>
       <p id="current-flashcard-instructions">Tap to reveal</p>
-      <p id="current-flashcard-index"></p>
+      <label id="current-flashcard-index" for="current-flashcard-progress"></label>
+      <progress id="current-flashcard-progress" value="0" max="1">Progress Bar</progress>
     </div>
   </div>
 </main>
