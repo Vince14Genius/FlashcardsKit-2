@@ -25,7 +25,47 @@
       left: 4vw;
     }
   }
+  
+  .flashcards-title {
+    font-size: 1.5rem;
+  }
 </style>
+<script>
+  let fkFlashcardsData = null;
+  let fkErrorMessageElement = null;
+  
+  
+  function dataError() {
+    if (fkErrorMessageElement === null) {
+      return;
+    }
+    fkErrorMessageElement.style.visibility = "visible";
+    fkErrorMessageElement.textContent = "Unable to read the flashcards JSON file. Please try a different one or check your Internet connection."
+  }
+  
+  function loadJSON() {
+    const getJSON = async url => {
+      const response = await fetch(url);
+      if(!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    }
+    
+    getJSON(prompt("Enter the URL of the JSON file that contains your flashcards: ")).then(data => {
+      fkFlashcardsData = data;
+      fkErrorMessageElement.style.visibility = "hidden";
+      
+      
+    }).catch(error => {
+      console.error(error);
+    });
+  }
+  
+  window.addEventListener('load', (event) => {
+    fkErrorMessageElement = getElementById("error-message");
+  });
+</script>
 
 <!-- Common Body -->
 <div id="universal-nav"></div>
@@ -34,5 +74,8 @@
 <!-- Unique Body -->
 <main id="main-content" class="centered" lang="en">
   <div id="visible-safe-area">
+    <h1 class="flashcards-title">FlashcardsKit 2</h1>
+    <button onclick="loadJSON()">Load Flashcards</button>
+    <p id="error-message">Click the "Load Flashcards" button to load your flashcards.</p>
   </div>
 </main>
