@@ -59,11 +59,12 @@
       
     }).catch(error => {
       console.error(error);
+      dataError();
     });
   }
   
   window.addEventListener('load', (event) => {
-    fkErrorMessageElement = getElementById("error-message");
+    fkErrorMessageElement = document.getElementById("error-message");
   });
 </script>
 
