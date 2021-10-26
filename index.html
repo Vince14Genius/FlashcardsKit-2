@@ -33,9 +33,11 @@
 <script>
   'use strict';
   
-  let fkFlashcardsData = null;
   let fkErrorMessageElement = null;
   let fkFlashcardsTitleElement = null;
+  let fkIsCurrentFlashcardRevealed = false;
+  let fkCurrentFlashcardIndex = 0;
+  let fkFlashcardsList = null;
   
   function dataError() {
     if (fkErrorMessageElement === null) {
@@ -43,6 +45,15 @@
     }
     fkErrorMessageElement.style.visibility = "visible";
     fkErrorMessageElement.textContent = "Unable to read the flashcards JSON file. Please try a different one or check your Internet connection."
+  }
+  
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
   }
   
   function loadJSON() {
@@ -55,12 +66,26 @@
     }
     
     getJSON(prompt("Enter the URL of the JSON file that contains your flashcards: ")).then(data => {
-      fkFlashcardsData = data;
       fkErrorMessageElement.style.visibility = "hidden";
       
-      if ("name" in fkFlashcardsData) {
-        fkFlashcardsTitleElement.innerHTML = fkFlashcardsData.name;
+      if ("name" in data) {
+        fkFlashcardsTitleElement.innerHTML = data.name;
+      } else {
+        dataError();
+        return;
       }
+      
+      if ("flashcards" in data) {
+        fkFlashcardsList = data.flashcards;
+        shuffleArray(fkFlashcardsList);
+      } else {
+        dataError();
+        return;
+      }
+      
+      fkCurrentFlashcardIndex = 0;
+      fkIsCurrentFlashcardRevealed = false;
+      
     }).catch(error => {
       console.error(error);
       dataError();
