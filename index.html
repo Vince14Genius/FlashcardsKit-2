@@ -92,9 +92,37 @@
     });
   }
   
+  function primaryUserAction() {
+    if (fkFlashcardsList === null) {
+      return;
+    }
+    
+    // handle logic
+    
+    if (fkIsCurrentFlashcardRevealed) {
+      ++fkCurrentFlashcardIndex;
+      if (fkCurrentFlashcardIndex >= fkFlashcardsList.length) {
+        fkCurrentFlashcardIndex = 0;
+      }
+    }
+    
+    fkIsCurrentFlashcardRevealed = !fkIsCurrentFlashcardRevealed;
+    
+    // update view
+    
+    document.getElementById("flashcard-content").style.visibility = "visible";
+    document.getElementById("current-flashcard-title").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].title;
+    document.getElementById("current-flashcard-reveal").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].reveal;
+    document.getElementById("current-flashcard-reveal").style.display = fkIsCurrentFlashcardRevealed ? "block" : "none";
+    document.getElementById("current-flashcard-instructions").innerHTML = fkIsCurrentFlashcardRevealed ? "Tap to reveal" : "Tap to continue";
+    document.getElementById("current-flashcard-index").innerHTML = `${fkCurrentFlashcardIndex + 1}/${fkFlashcardsList.length}`;
+  }
+  
   window.addEventListener('load', (event) => {
     fkErrorMessageElement = document.getElementById("error-message");
     fkFlashcardsTitleElement = document.getElementsByClassName("flashcards-title")[0];
+    
+    document.getElementById("visible-safe-area").addEventListener('click', primaryUserAction);
   });
 </script>
 
@@ -108,5 +136,11 @@
     <h1 class="flashcards-title">FlashcardsKit 2</h1>
     <button onclick="loadJSON()">Load Flashcards</button>
     <p id="error-message">Click the "Load Flashcards" button to load your flashcards.</p>
+    <div id="flashcard-content" style="visibility: hidden;">
+      <h2 id="current-flashcard-title">current-flashcard-title</h2>
+      <p id="current-flashcard-reveal" style="display: none;">current-flashcard-reveal</p>
+      <p id="current-flashcard-instructions">Tap to reveal</p>
+      <p id="current-flashcard-index"></p>
+    </div>
   </div>
 </main>
