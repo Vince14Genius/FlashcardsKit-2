@@ -11,12 +11,19 @@
   
   #visible-safe-area {
     position: fixed;
-    background: #444;
+    background: #303030;
     border-radius: 8px;
     width: 80vw;
     height: 80vh;
     left: 10vw;
     top: 10vh;
+  }
+  
+  @media (max-width: 1000px) { 
+    #visible-safe-area {
+      width: 92vw;
+      left: 4vw;
+    }
   }
 </style>
 
