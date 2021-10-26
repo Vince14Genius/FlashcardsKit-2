@@ -78,6 +78,7 @@
       if ("flashcards" in data) {
         fkFlashcardsList = data.flashcards;
         shuffleArray(fkFlashcardsList);
+        updateView();
       } else {
         dataError();
         return;
@@ -90,6 +91,19 @@
       console.error(error);
       dataError();
     });
+  }
+  
+  function updateView() {
+    if (fkFlashcardsList === null) {
+      return;
+    }
+    
+    document.getElementById("flashcard-content").style.visibility = "visible";
+    document.getElementById("current-flashcard-title").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].title;
+    document.getElementById("current-flashcard-reveal").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].reveal;
+    document.getElementById("current-flashcard-reveal").style.display = fkIsCurrentFlashcardRevealed ? "block" : "none";
+    document.getElementById("current-flashcard-instructions").innerHTML = fkIsCurrentFlashcardRevealed ? "Tap to continue" : "Tap to reveal";
+    document.getElementById("current-flashcard-index").innerHTML = `${fkCurrentFlashcardIndex + 1}/${fkFlashcardsList.length}`;
   }
   
   function primaryUserAction() {
@@ -110,12 +124,7 @@
     
     // update view
     
-    document.getElementById("flashcard-content").style.visibility = "visible";
-    document.getElementById("current-flashcard-title").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].title;
-    document.getElementById("current-flashcard-reveal").innerHTML = fkFlashcardsList[fkCurrentFlashcardIndex].reveal;
-    document.getElementById("current-flashcard-reveal").style.display = fkIsCurrentFlashcardRevealed ? "block" : "none";
-    document.getElementById("current-flashcard-instructions").innerHTML = fkIsCurrentFlashcardRevealed ? "Tap to reveal" : "Tap to continue";
-    document.getElementById("current-flashcard-index").innerHTML = `${fkCurrentFlashcardIndex + 1}/${fkFlashcardsList.length}`;
+    updateView();
   }
   
   window.addEventListener('load', (event) => {
