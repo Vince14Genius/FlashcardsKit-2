@@ -17,6 +17,7 @@
     height: 80vh;
     left: 10vw;
     top: 10vh;
+    padding: 8px;
   }
   
   @media (max-width: 1000px) { 
@@ -39,12 +40,18 @@
   }
   
   .progress-bar-container {
-    padding: 4px;
-    border-radius: 8px;
-    background: var(--background-color-tertiary);
     position: absolute;
     top: 8px;
     right: 8px;
+  }
+  
+  .progress-bar-visual-container {
+    border: 2px solid #c0c0c0;
+  }
+  
+  .flashcards-toolbar {
+    position: absolute;
+    bottom: 8px;
   }
 </style>
 <script>
@@ -175,11 +182,15 @@
       <p id="current-flashcard-reveal" class="centered" style="display: none;">current-flashcard-reveal</p>
       <p id="current-flashcard-instructions" class="centered">Tap to reveal</p>
       <div class="progress-bar-container">
-        <label id="current-flashcard-index" for="current-flashcard-progress"></label>
-        <progress id="current-flashcard-progress" value="0" max="1">Progress Bar</progress>
+        <p>
+          <progress id="current-flashcard-progress" value="0" max="1">Progress Bar</progress>
+        </p>
+        <p class="progress-bar-visual-container">
+          <label id="current-flashcard-index" for="current-flashcard-progress"></label>
+        </p>
       </div>
     </section>
-    <p class="flashcards-toolbar">
+    <p class="flashcards-toolbar centered">
       <button onclick="loadJSON()">Load Flashcards</button>
       <a href="https://vince14genius.github.io/YAML-JSON-Flashcards/">A list of ready to use flashcards files</a>
     </p>
