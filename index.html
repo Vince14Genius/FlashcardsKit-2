@@ -28,6 +28,23 @@
   
   .flashcards-title {
     font-size: 1.5rem;
+    opacity: 0.6;
+  }
+  
+  .flashcard-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .progress-bar-container {
+    padding: 4px;
+    border-radius: 8px;
+    background: var(--background-color-tertiary);
+    position: absolute;
+    top: 8px;
+    right: 8px;
   }
 </style>
 <script>
@@ -146,20 +163,25 @@
 <script src="/scripts/nav.js"></script>
 
 <!-- Unique Body -->
-<main id="main-content" class="centered" lang="en">
+<main id="main-content" lang="en">
   <div id="visible-safe-area">
     <h1 class="flashcards-title">FlashcardsKit 2</h1>
+    <p id="error-message">Click the "Load Flashcards" button to load your flashcards.</p>
+    <noscript>
+      You need to enable JavaScript to be able to use FlashcardsKit 2.
+    </noscript>
+    <section id="flashcard-content" style="visibility: hidden;">
+      <h2 id="current-flashcard-title" class="centered">current-flashcard-title</h2>
+      <p id="current-flashcard-reveal" class="centered" style="display: none;">current-flashcard-reveal</p>
+      <p id="current-flashcard-instructions" class="centered">Tap to reveal</p>
+      <div class="progress-bar-container">
+        <label id="current-flashcard-index" for="current-flashcard-progress"></label>
+        <progress id="current-flashcard-progress" value="0" max="1">Progress Bar</progress>
+      </div>
+    </section>
     <p class="flashcards-toolbar">
       <button onclick="loadJSON()">Load Flashcards</button>
       <a href="https://vince14genius.github.io/YAML-JSON-Flashcards/">A list of ready to use flashcards files</a>
     </p>
-    <p id="error-message">Click the "Load Flashcards" button to load your flashcards.</p>
-    <div id="flashcard-content" style="visibility: hidden;">
-      <h2 id="current-flashcard-title">current-flashcard-title</h2>
-      <p id="current-flashcard-reveal" style="display: none;">current-flashcard-reveal</p>
-      <p id="current-flashcard-instructions">Tap to reveal</p>
-      <label id="current-flashcard-index" for="current-flashcard-progress"></label>
-      <progress id="current-flashcard-progress" value="0" max="1">Progress Bar</progress>
-    </div>
   </div>
 </main>
