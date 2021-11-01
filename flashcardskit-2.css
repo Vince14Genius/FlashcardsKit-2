@@ -13,10 +13,6 @@
     padding: 8px;
 }
 
-#error-message {
-    color: var(--text-color-warning);
-}
-
 .flashcards-title {
     font-size: 1.5rem;
     opacity: 0.6;
