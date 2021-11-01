@@ -20,6 +20,10 @@
     padding: 8px;
   }
   
+  #error-message {
+    color: var(--text-color-warning);
+  }
+  
   .flashcards-title {
     font-size: 1.5rem;
     opacity: 0.6;
@@ -117,15 +121,15 @@
       if ("flashcards" in data) {
         fkFlashcardsList = data.flashcards;
         shuffleArray(fkFlashcardsList);
+        
+        // reset stuff
+        fkCurrentFlashcardIndex = 0;
+        fkIsCurrentFlashcardRevealed = false;
         updateView();
       } else {
         dataError();
         return;
       }
-      
-      fkCurrentFlashcardIndex = 0;
-      fkIsCurrentFlashcardRevealed = false;
-      
     }).catch(error => {
       console.error(error);
       dataError();
