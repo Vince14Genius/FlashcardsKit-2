@@ -11,6 +11,7 @@ function dataError() {
         return;
     }
     fkErrorMessageElement.style.visibility = "visible";
+    fkErrorMessageElement.style.color = "var(--text-color-warning)";
     fkErrorMessageElement.textContent = "Unable to read the flashcards JSON file. Please try a different one or check your Internet connection."
 }
 
