@@ -20,16 +20,17 @@
     padding: 8px;
   }
   
-  @media (max-width: 1000px) { 
-    #visible-safe-area {
-      width: 92vw;
-      left: 4vw;
-    }
-  }
-  
   .flashcards-title {
     font-size: 1.5rem;
     opacity: 0.6;
+  }
+  
+  .current-flashcard-title {
+    font-size: 2.0rem;
+  }
+  
+  .current-flashcard-reveal {
+    font-size: 1.5rem;
   }
   
   .flashcard-content {
@@ -49,6 +50,26 @@
   .flashcards-toolbar {
     position: absolute;
     bottom: 8px;
+  }
+  
+  label {
+    opacity: 0.6;
+  }
+  
+  @media (max-width: 1000px) { 
+    #visible-safe-area {
+      width: 92vw;
+      left: 4vw;
+    }
+    
+    .flashcards-title {
+      font-size: 1.0rem;
+      opacity: 0.6;
+    }
+    
+    progress {
+      width: 150px;
+    }
   }
 </style>
 <script>
