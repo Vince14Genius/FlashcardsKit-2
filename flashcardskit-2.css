@@ -1,1 +1,67 @@
+#main-content {
+    height: 100vh;
+}
 
+#visible-safe-area {
+    position: fixed;
+    background: #303030;
+    border-radius: 8px;
+    width: 80vw;
+    height: 80vh;
+    left: 10vw;
+    top: 10vh;
+    padding: 8px;
+}
+
+#error-message {
+    color: var(--text-color-warning);
+}
+
+.flashcards-title {
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+#current-flashcard-title {
+    font-size: 2rem;
+}
+
+#current-flashcard-reveal {
+    font-size: 1.5rem;
+}
+
+.progress-bar-container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    text-align: right;
+}
+
+.flashcards-toolbar {
+    position: absolute;
+    bottom: 8px;
+}
+
+label {
+    opacity: 0.6;
+}
+
+@media (max-width: 1000px) {
+    #visible-safe-area {
+        width: 92vw;
+        left: 4vw;
+    }
+
+    .flashcards-title {
+        font-size: 1rem;
+        opacity: 0.6;
+    }
+
+    .progress-bar-container {
+        top: 2px;
+    }
+
+    progress {
+        width: 150px;
+    }
+}
